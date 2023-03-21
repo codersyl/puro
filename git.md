@@ -2,15 +2,25 @@
 [官方英语文档](https://git-scm.com/docs)
 [菜鸟教程](https://www.runoob.com/git/git-basic-operations.html)
 
-
 # 基本操作
-`git init`在当前目录初始化一个仓库
+
+## git init
+
+在当前目录初始化一个仓库
+
+## git add
 
 `git add <file>`把<file>提交到暂存区
 
+## git commit
+
 `git commit -m "<description>"`把所有的暂存区提交到版本库，并添加注释
 
+## git status
+
 `git status`查看当前仓库的状态
+
+## git log
 
 `git log`查看从近到远的日志  
 `git log --pretty=oneline`日志显示的更整洁
@@ -92,13 +102,7 @@ $ cat .gitconfig
 
 `git remote remove <name>` 删除远程服务器连接
 
-# 一次提交流程
 
-```shell
-git add 
-git commit -m "<description>"
-git push <remote_name> <branch_name>
-```
 # 常见使用场景
 
 ## git新建一个库，连接远程库，拉到本地
@@ -115,8 +119,26 @@ git merge remoteName/branchNameOfRemote
 可直接`git pull origin remoteBranchName:localBranchName`，相当于 git fetch 加上 git merge 
 
 ## git merge冲突
-
 目前出现的情况
 * 修改了同一个文件
 
 使用命令 `git merge --no-ff origin/branchName` 来处理冲突，解决后再提交
+
+## 单人开发一次提交流程
+```shell
+git add 
+git commit -m "<description>"
+git push <remote_name> <branch_name>
+```
+
+## git常规工作流
+新开一个分支 feature，开发，提交，push feature。
+
+如果此时main有更新update，  
+fetch origin master/main，git rebase main/master，  
+进行代码取舍审查，完毕后feature分支就是 初始 -> update -> myChange  
+再push到origin，此时相当于对项目管理这发起了一个pull request
+
+项目管理者需要squash and merge
+
+此时本地可以把feature分支删除，然后拉取远程的代码
